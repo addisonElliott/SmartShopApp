@@ -1,4 +1,11 @@
 <resources>
-    <string name="app_name">SmartShopApp</string>
+    <string name="app_name">Smart Shop</string>
     <string name="action_settings">Settings</string>
+    <string name="action_add">Settings</string>
+    <string name="shopping_list_toolbar_checkbox_all">All</string>
+    <string-array name="sports_array">
+        <item>Shuttle Badminton</item>
+        <item>Tennis</item>
+        <item>FootBall</item>
+    </string-array>
 </resources>
