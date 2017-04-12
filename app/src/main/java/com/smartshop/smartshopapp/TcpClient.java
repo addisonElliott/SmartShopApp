@@ -75,7 +75,7 @@ public class TcpClient extends Thread
             address = InetAddress.getByName(serverName);
 
             Log.v("TCP", String.format("Found IP for host %s: %s", serverName, address.toString()));
-            Log.v("TCP", String.format("Attempting to connect to %s on port %i", address.toString(),
+            Log.v("TCP", String.format("Attempting to connect to %s on port %d", address.toString(),
                                        portNumber));
 
             socket = new Socket(address, portNumber);
@@ -86,7 +86,7 @@ public class TcpClient extends Thread
             connected = true;
             return true;
         }
-        catch (IOException e)
+        catch (Exception e)
         {
             Log.e("TCP", "Socket Error", e);
 

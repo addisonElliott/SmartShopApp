@@ -7,6 +7,7 @@
     <string name="prompt_server">Server Name</string>
     <string name="prompt_port">Port Number</string>
     <string name="prompt_port_default">5432</string>
+    <string name="prompt_remember_me">Remember Me</string>
     <string name="action_connect">Connect to Server</string>
     <string name="action_connect_short">Connect</string>
     <string name="error_invalid_server">Unable to connect to server. Please try again later.</string>

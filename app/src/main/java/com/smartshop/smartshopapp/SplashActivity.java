@@ -5,6 +5,7 @@ import android.animation.AnimatorListenerAdapter;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Environment;
@@ -68,6 +69,8 @@ public class SplashActivity extends AppCompatActivity
     EditText serverEditText;
     @BindView(R.id.port)
     EditText portEditText;
+    @BindView(R.id.rememberCheckBox)
+    CheckBox rememberCheckBox;
     @BindView(R.id.connect_button)
     Button connectButton;
 
@@ -78,6 +81,8 @@ public class SplashActivity extends AppCompatActivity
     String defaultPort;
     @BindString(R.string.error_field_required)
     String errorRequiredField;
+    @BindString(R.string.error_invalid_server)
+    String errorInvalidServer;
 
     SharedPreferences preferences = null;
 
@@ -100,10 +105,9 @@ public class SplashActivity extends AppCompatActivity
         String serverName = preferences.getString("server", "");
         int portNumber = preferences.getInt("port", -1);
 
-        if (serverName.length() == 0 || portNumber == -1)
-        {
+        // If there is a valid host and port, attempt to connect.
+        if (serverName.length() != 0 && portNumber > 0)
             connect(serverName, portNumber);
-        }
     }
 
     @OnClick(R.id.connect_button)
@@ -141,20 +145,38 @@ public class SplashActivity extends AppCompatActivity
         }
         else
         {
-            connect(server, Integer.valueOf(port));
+            Log.v("TCP", String.format("Connecting to server %s at %s", server, port));
+            connect(server, Integer.parseInt(port));
         }
     }
 
     public void connect(String server, int port)
     {
+        Log.v("TCP", String.format("Connecting to server %s at %d", server, port));
         client = new TcpClient(server, port);
+        Log.v("TCP", "Just a test");
         if (client.connect())
         {
-            Toast.makeText(getApplicationContext(), "Connected successfully!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connected successfully!",
+                           Toast.LENGTH_SHORT).show();
             client.start();
-            client.sendMessage("testing");
+            //client.sendMessage("testing");
+
+            // Save credentials since we successfully connected and checkbox is selected
+            if (rememberCheckBox.isChecked())
+            {
+                SharedPreferences.Editor editor = preferences.edit();
+
+                editor.putString("server", server);
+                editor.putInt("port", port);
+                editor.apply();
+            }
 
             // Go to main activity
+        }
+        else
+        {
+            invalidServerDialog();
         }
     }
 
@@ -196,6 +218,25 @@ public class SplashActivity extends AppCompatActivity
             progressBar.setVisibility(show ? View.VISIBLE : View.GONE);
             connectForm.setVisibility(show ? View.GONE : View.VISIBLE);
         }
+    }
+
+    public void invalidServerDialog()
+    {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(this);
+
+        alertDialog.setMessage(errorInvalidServer);
+        alertDialog.setTitle("Error");
+        alertDialog.setPositiveButton("OK", null);
+        alertDialog.setCancelable(true);
+        alertDialog.create().show();
+
+        alertDialog.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+
+            }
+        });
     }
 }
 
