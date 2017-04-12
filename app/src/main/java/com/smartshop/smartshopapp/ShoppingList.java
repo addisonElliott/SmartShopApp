@@ -1,6 +1,8 @@
 package com.smartshop.smartshopapp;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.ActionBar;
@@ -43,6 +45,8 @@ public class ShoppingList extends AppCompatActivity
     @BindView(R.id.titleTextView)
     TextView titleTextView;
 
+    SharedPreferences preferences = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -51,6 +55,9 @@ public class ShoppingList extends AppCompatActivity
 
         // Initialize all variables annotated with @BindView and other variants
         ButterKnife.bind(this);
+
+        // Get preferences
+        preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
 
         // Set action bar to be the mainToolbar, set the title and subtitle and disable the
         // logo and home button

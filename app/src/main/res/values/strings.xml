@@ -3,9 +3,12 @@
     <string name="action_settings">Settings</string>
     <string name="action_add">Settings</string>
     <string name="shopping_list_toolbar_checkbox_all">All</string>
-    <string-array name="sports_array">
-        <item>Shuttle Badminton</item>
-        <item>Tennis</item>
-        <item>FootBall</item>
-    </string-array>
+
+    <string name="prompt_server">Server Name</string>
+    <string name="prompt_port">Port Number</string>
+    <string name="prompt_port_default">5432</string>
+    <string name="action_connect">Connect to Server</string>
+    <string name="action_connect_short">Connect</string>
+    <string name="error_invalid_server">Unable to connect to server. Please try again later.</string>
+    <string name="error_field_required">This field is required</string>
 </resources>
