@@ -123,11 +123,7 @@ public class ShoppingList extends AppCompatActivity
     {
         //Array list of countries
         ArrayList<ShoppingListItem> shoppingList = new ArrayList<ShoppingListItem>();
-        ShoppingListItem item = new ShoppingListItem(1, "AFGAFGAFGAFGAFGAFGAFG", 100);
-        shoppingList.add(item);
-        item = new ShoppingListItem(2, "ABCMountain Dew", 100);
-        shoppingList.add(item);
-        item = new ShoppingListItem(3, "MONLong Long Text", 100);
+        ShoppingListItem item = new ShoppingListItem(1, "ZZZ", 100);
         shoppingList.add(item);
         item = new ShoppingListItem(4, "YYY", 12);
         shoppingList.add(item);

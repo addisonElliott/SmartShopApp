@@ -11,5 +11,6 @@
     <string name="action_connect">Connect to Server</string>
     <string name="action_connect_short">Connect</string>
     <string name="error_invalid_server">Unable to connect to server. Please try again later.</string>
+    <string name="error_connect_server">There was an error while connecting to the server.</string>
     <string name="error_field_required">This field is required</string>
 </resources>
